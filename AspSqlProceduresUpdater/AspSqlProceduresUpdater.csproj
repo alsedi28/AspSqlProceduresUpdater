@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -6,6 +6,8 @@
     <Authors>Sergey Ignatushchenko</Authors>
     <RepositoryUrl>https://github.com/alsedi28/AspSqlProceduresUpdater</RepositoryUrl>
     <RepositoryType></RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>This package allows you to update the custom stored procedures in the database that are in the project when you run the application.</Description>
   </PropertyGroup>
 
   <ItemGroup>
