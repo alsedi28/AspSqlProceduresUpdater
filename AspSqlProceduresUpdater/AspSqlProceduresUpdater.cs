@@ -9,16 +9,21 @@ namespace Alsedi28
 	public static class AspSqlProceduresUpdater
 	{
 		/// <summary>
-		/// Обновляет все пользовательские хранимые процедуры.
+		/// Updates all user stored procedures.
 		/// </summary>
 		/// <remarks>
-		/// Удаляет все процедуры и создает все заново.
-		/// Посмотреть какие процедуры будут удалены можно выполнив запрос в нужной БД:
+		/// Removes all procedures and creates all over again.
+		/// You can see which procedures will be deleted by performing a query in the desired database:
 		/// SELECT [name] FROM sysobjects WHERE [type] = 'P' AND category = 0
 		/// </remarks>
-		/// <param name="сonnectionString">Строка подключения к базе данных</param>
-		/// <param name="pathToProcedureFolder">Путь к корневому каталогу с процедурами. Будут взяты и выполнены все файлы с расширением .sql.</param>
-		public static void CreateProcedures(string сonnectionString, string pathToProcedureFolder)
+		/// <param name="сonnectionString">
+		/// Database connection string. Example: "Server=localhost\SQLEXPRESS;Database=DBConnection;Trusted_Connection=True;".
+		/// </param>
+		/// <param name="pathToProcedureFolder">
+		/// The absolute path to the root directory of procedures. All files with .sql extension will be taken and executed.
+		/// You can use HttpContext.Current.Server.MapPath with relative path for build absolute path.
+		/// </param>
+		public static void UpdateProcedures(string сonnectionString, string pathToProcedureFolder)
 		{
 			if (string.IsNullOrEmpty(сonnectionString))
 				throw new ArgumentNullException(nameof(сonnectionString));
@@ -41,6 +46,9 @@ namespace Alsedi28
 			}
 		}
 
+		/// <summary>
+		/// Removes all user stored procedures.
+		/// </summary>
 		private static void DropProcedures(SqlConnection connection)
 		{
 			string dropAllNonSystemStoredProceduresQuery = @"
@@ -72,6 +80,10 @@ namespace Alsedi28
 			}
 		}
 
+
+		/// <summary>
+		/// Create new user stored procedures.
+		/// </summary>
 		private static void CreateProcedure(SqlConnection connection, string procedure)
 		{
 			using (var command = new SqlCommand(procedure, connection))
@@ -90,6 +102,9 @@ namespace Alsedi28
 			}
 		}
 
+		/// <summary>
+		/// Get the list of user stored procedures.
+		/// </summary>
 		private static List<string> GetAllProcedures(string pathToFolder)
 		{
 			string[] filesNames;
