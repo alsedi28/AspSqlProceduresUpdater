@@ -19,7 +19,7 @@ https://www.nuget.org/packages/AspSqlProceduresUpdater
 
 # Usage
 
-You need to create a directory in which to place files with the extension .sql, which create SQL procedures. This directory can have subdirectories, the method will find all .sql scripts and execute them. Then call AspSqlProceduresUpdater.UpdateProcedures and pass the database connection string and the full absolute path to the scripted directory.
+You need to create a directory in which to place files with the extension .sql, which create SQL procedures. This directory can have subdirectories, the method will find all .sql scripts and execute them. Then call ***AspSqlProceduresUpdater.UpdateProcedures*** and pass the database connection string and the full absolute path to the scripted directory.
 Before that you can check which SQL procedures the method will delete at startup. To do this, run the following code in the desired database (it will print the names of SQL procedures that will be removed):
 
 ```sql
